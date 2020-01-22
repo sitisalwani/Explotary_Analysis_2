@@ -23,7 +23,7 @@ baltimore_vehicle_plot <- ggplot(total_emission_24510_vehicle, aes(factor(year),
   theme(plot.title = element_text(size = 12),
         axis.title.x = element_text(size = 12),
         axis.title.y = element_text(size = 12)) +
-  ggsave("plot5.png", width = 30, height = 30, units = "cm")
+  ggsave("plot5.png", width = 20, height = 20, units = "cm")
 
 print(baltimore_vehicle_plot)
 dev.copy(png,'plot5.png')

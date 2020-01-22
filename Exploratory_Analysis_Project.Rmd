@@ -2,7 +2,9 @@
 title: "Exploratory Analysis Project"
 author: "Siti Salwani Yaacob"
 date: "1/19/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -49,177 +51,196 @@ head(Source_Classification_Code)
 ```
 
 
-### Question 1 : Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+#### Question 1 : Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+
 First we will aggregate the total PM2.5 emission from all sources for each the years 1999, 2002, 2005 and 2008.
 ```{r}
-aggregate_Total <- aggregate(Emissions ~ year, summarySCC_PM25, sum)
+aggregate_total <- aggregate(Emissions ~ year, summarySCC_PM25, sum)
 ```
 
 
 Using the base plotting system, now we plot the total PM2.5 Emission from all sources,
 ```{r}
 barplot(
-  (aggregate_Total$Emissions)/10^6,
-  names.arg=aggregate_Total$year,
+  (aggregate_total$Emissions)/10^6,
+  names.arg=aggregate_total$year,
   xlab="Year",
   ylab="PM2.5 Emissions (10^6 Tons)",
   main="Total PM2.5 Emissions From All US Sources"
 )
+
+dev.copy(png,'plot1.png')
+dev.off()
 ```
 
-Question : Have total emissions from PM2.5 decreased in the United States from 1999 to 2008?
-As we can see from the plot, total emissions have decreased in the US from 1999 to 2008.
+*Question : Have total emissions from PM2.5 decreased in the United States from 1999 to 2008?*  
+As we can see from the plot, total emissions have decreased in the US from 1999 to 2008.    
 
-### Questions 2 : Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+#### Questions 2 : Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
 Subset the data for fips == "24510" and then aggregate them by summing the Emissions per years
-
 ```{r}
-baltimoreNEI <- summarySCC_PM25[summarySCC_PM25$fips=="24510",]
-aggTotalsBaltimore <- aggregate(Emissions ~ year, baltimoreNEI,sum)
+baltimore_summarySCC_PM25 <- summarySCC_PM25[summarySCC_PM25$fips=="24510",]
+aggregate_total_baltimore <- aggregate(Emissions ~ year, baltimore_summarySCC_PM25,sum)
 ```
-
 
 Now we use the base plotting system to make a plot of this data
 ```{r}
 barplot(
-  aggTotalsBaltimore$Emissions,
-  names.arg=aggTotalsBaltimore$year,
+  aggregate_total_baltimore$Emissions,
+  names.arg=aggregate_total_baltimore$year,
   xlab="Year",
   ylab="PM2.5 Emissions (Tons)",
   main="Total PM2.5 Emissions From All Baltimore City Sources"
 )
+dev.copy(png,'plot2.png')
+dev.off()
 ```
-Have total emissions from PM2.5 decreased in Baltimore City, Maryland from 1999 to 2008?
-Overall total emissions from PM2.5 have decreased in Baltimore City, Maryland from 1999 to 2008.
+*Have total emissions from PM2.5 decreased in Baltimore City, Maryland from 1999 to 2008?*
+Overall total emissions from PM2.5 have decreased in Baltimore City, Maryland from 1999 to 2008.  
 
 
-### Question 3 : Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999–2008 for Baltimore City? Which have seen increases in emissions from 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.
-Using ggplot2 plotting system
+#### Question 3 : Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999–2008 for Baltimore City? Which have seen increases in emissions from 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.  
+
+Using ggplot2 plotting system.
 ```{r}
 library(ggplot2)
 
-ggp <- ggplot(baltimoreNEI,aes(factor(year),Emissions,fill=type)) +
+plotting_baltimore <- ggplot(baltimore_summarySCC_PM25,aes(factor(year),Emissions,fill=type)) +
   geom_bar(stat="identity") +
   theme_bw() + guides(fill=FALSE)+
   facet_grid(.~type,scales = "free",space="free") + 
   labs(x="year", y=expression("Total PM"[2.5]*" Emission (Tons)")) + 
   labs(title=expression("PM"[2.5]*" Emissions, Baltimore City 1999-2008 by Source Type"))
 
-print(ggp)
+print(plotting_baltimore)
+dev.copy(png,'plot3.png')
+dev.off()
 ```
 
-Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City?
+*Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City?*  
+The non-road, nonpoint, on-road sorces types have all seen decreased emissions overall from 1999-2008 in Baltimore City.   
 
-The non-road, nonpoint, on-road sorces types have all seen decreased emissions overall from 1999-2008 in Baltimore City.
-
-Which have seen increases in emissions from 1999-2008?
-
+*Which have seen increases in emissions from 1999-2008?*   
 The point sources saw a slight increase overall from 1999-2008. Also note that the point source saw a significant increase until 2005 at which point it decreases again by 2008 to just above the starting values.
 
-### Question 4 : Across the United States, how have emissions from coal combustion-related sources changed from 1999–2008?
+
+#### Question 4 : Across the United States, how have emissions from coal combustion-related sources changed from 1999–2008?  
+
 First we subset coal combustion source factors NEI data.
 ```{r}
 # Subset coal combustion related NEI data
-combustionRelated <- grepl("comb", Source_Classification_Code$SCC.Level.One, ignore.case=TRUE)
-coalRelated <- grepl("coal", Source_Classification_Code$SCC.Level.Four, ignore.case=TRUE) 
-coalCombustion <- (combustionRelated & coalRelated)
-combustionSCC <- Source_Classification_Code[coalCombustion,]$SCC
-combustionNEI <- summarySCC_PM25[summarySCC_PM25$SCC %in% combustionSCC,]
+combustion_related <- grepl("comb", Source_Classification_Code$SCC.Level.One, ignore.case=TRUE)
+coal_related <- grepl("coal", Source_Classification_Code$SCC.Level.Four, ignore.case=TRUE) 
+coal_combustion <- (combustion_related & coal_related)
+combustion_Source_Classification_Code <- Source_Classification_Code[coal_combustion,]$SCC
+combustion_summarySCC_PM25 <- summarySCC_PM25[summarySCC_PM25$SCC %in% combustion_Source_Classification_Code,]
 ```
-Note: The SCC levels go from generic to specific. We assume that coal combustion related SCC records are those where SCC.Level.One contains the subctring 'comb' and SCC.Level.Four contains the substring 'coal'.
 
+Note: The SCC levels go from generic to specific. We assume that coal combustion related SCC records are those where SCC.Level.One contains the subctring 'comb' and SCC.Level.Four contains the substring 'coal'.
 
 ```{r}
 library(ggplot2)
 
-ggp <- ggplot(combustionNEI,aes(factor(year),Emissions/10^5)) +
+emission_changed_coal <- ggplot(combustion_summarySCC_PM25,aes(factor(year),Emissions/10^5)) +
   geom_bar(stat="identity",fill="grey",width=0.75) +
   theme_bw() +  guides(fill=FALSE) +
   labs(x="year", y=expression("Total PM"[2.5]*" Emission (10^5 Tons)")) + 
   labs(title=expression("PM"[2.5]*" Coal Combustion Source Emissions Across US from 1999-2008"))
 
-print(ggp)
+print(emission_changed_coal)
+dev.copy(png,'plot4.png')
+dev.off()
 ```
 
-Accross the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
+*Accross the United States, how have emissions from coal combustion-related sources changed from 1999-2008?*  
 Emission from coal combustion related sources have decreased from 6*10^6 to below 4*10^6 from 1999-2008.
-Eg. Emissions from coal combustion related sources have decreased about 1/3 from 1999-2008.
+Eg. Emissions from coal combustion related sources have decreased about 1/3 from 1999-2008.  
 
-### Question 5 : How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City?
+
+#### Question 5 : How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City?
+
 First we subset the motor vehicles, which we assume is anything like Motor Vehicle in SCC.Level.Two.
 ```{r}
 
 library(dplyr)
-SCC_Vehicles <- Source_Classification_Code %>%
-        filter(grepl('[Vv]ehicle', SCC.Level.Two)) %>%
-        select(SCC, SCC.Level.Two)
+vehicle_Source_Classification_Code <- Source_Classification_Code %>%
+  filter(grepl('[Vv]ehicle', SCC.Level.Two)) %>%
+  select(SCC, SCC.Level.Two)
 
-Tot_Emi_24510_V <- summarySCC_PM25 %>%
-        filter(fips == "24510") %>%
-        select(SCC, fips, Emissions, year) %>%
-        inner_join(SCC_Vehicles, by = "SCC") %>%
-        group_by(year) %>%
-        summarise(Total_Emissions = sum(Emissions, na.rm = TRUE)) %>%
-        select(Total_Emissions, year)
+total_emission_24510_vehicle <- summarySCC_PM25 %>%
+  filter(fips == "24510") %>%
+  select(SCC, fips, Emissions, year) %>%
+  inner_join(vehicle_Source_Classification_Code, by = "SCC") %>%
+  group_by(year) %>%
+  summarise(Total_Emissions = sum(Emissions, na.rm = TRUE)) %>%
+  select(Total_Emissions, year)
+
 ```
 
 
 ```{r}
-Baltimore_Vehicles_Plot <- ggplot(Tot_Emi_24510_V, aes(factor(year), Total_Emissions)) +
-        geom_bar(stat = "identity", fill = "sienna3", width = 0.5) +
-        labs(x = "Year", y = "Emissions (Tons)", title = "Total Motor Vehicle Related Emissions In Baltimore City From 1999 - 2008") +
-        theme(plot.title = element_text(size = 14),
-              axis.title.x = element_text(size = 12),
-              axis.title.y = element_text(size = 12)) +
-        ggsave("plot5.png", width = 30, height = 30, units = "cm")
+baltimore_vehicle_plot <- ggplot(total_emission_24510_vehicle, aes(factor(year), Total_Emissions)) +
+  geom_bar(stat = "identity", fill = "dimgray", width = 0.4) +
+  labs(x = "Year", y = "Emissions (Tons)", title = "Total Motor Vehicle Related Emissions In Baltimore City From 1999 - 2008") +
+  theme(plot.title = element_text(size = 12),
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12)) +
+  ggsave("plot5.png", width = 30, height = 30, units = "cm")
 
-print(Baltimore_Vehicles_Plot)
+print(baltimore_vehicle_plot)
+dev.copy(png,'plot5.png')
+dev.off()
 
 ```
+*How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?*  
+Emissions from motor vehicle sources have dropped from 1999-2008 in Baltimore City  
 
-How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
-Emissions from motor vehicle sources have dropped from 1999-2008 in Baltimore City
 
 ### Question 6 : Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips=="06037"). Which city has seen greater changes over time in motor vehicle emissions?
+
 Comparing emissions from motor vehicle sources in Baltimore City (fips=="24510") with emissions from motor vehicle sources in Los Angeles County, California (fips=="06037")
 ```{r}
 
 library(dplyr)
 
-SCC_Vehicles <- Source_Classification_Code %>% 
-        filter(grepl('[Vv]ehicle', SCC.Level.Two)) %>%
-        select(SCC, SCC.Level.Two)
+vehicles_Source_Classification_Code <- Source_Classification_Code %>% 
+  filter(grepl('[Vv]ehicle', SCC.Level.Two)) %>%
+  select(SCC, SCC.Level.Two)
 
-Tot_Emi_Two_Locs <- summarySCC_PM25 %>%
-        filter(fips == "24510" | fips == "06037") %>%
-        select(fips, SCC, Emissions, year) %>%
-        inner_join(SCC_Vehicles, by = "SCC") %>%
-        group_by(fips, year) %>%
-        summarise(Total_Emissions = sum(Emissions, na.rm = TRUE)) %>%
-        select(Total_Emissions, fips, year)
+total_emission_two_location <- summarySCC_PM25 %>%
+  filter(fips == "24510" | fips == "06037") %>%
+  select(fips, SCC, Emissions, year) %>%
+  inner_join(vehicles_Source_Classification_Code, by = "SCC") %>%
+  group_by(fips, year) %>%
+  summarise(Total_Emissions = sum(Emissions, na.rm = TRUE)) %>%
+  select(Total_Emissions, fips, year)
 ```
 
 Now we plot using the ggplot2 system,
 
 ```{r}
-Tot_Emi_Two_Locs$fips <- gsub("24510", "Baltimore City", Tot_Emi_Two_Locs$fips)
-Tot_Emi_Two_Locs$fips <- gsub("06037", "Los Angeles County", Tot_Emi_Two_Locs$fips)
+total_emission_two_location$fips <- gsub("24510", "Baltimore City", total_emission_two_location$fips)
+total_emission_two_location$fips <- gsub("06037", "Los Angeles County", total_emission_two_location$fips)
 ```
 
 ```{r}
-Two_Locs_Plot <- ggplot(Tot_Emi_Two_Locs, aes(x = factor(year), y = Total_Emissions, fill = fips)) +
-        geom_bar(stat = "identity", width = 0.7) +
-        facet_grid(.~fips) + 
-        labs(x = "Year", y = "Emissions (Tons)", title = "Comparison of Motor Vehicle Related Emissions Between Baltimore City and Los Angeles From 1999 - 2008") +
-        theme(plot.title = element_text(size = 14),
-              axis.title.x = element_text(size = 12),
-              axis.title.y = element_text(size = 12),
-              strip.text.x = element_text(size = 12)) +
-        theme_dark() + 
-        ggsave("plot6.png", width = 30, height = 30, units = "cm")
+plotting_two_location <- ggplot(total_emission_two_location, aes(x = factor(year), y = Total_Emissions, fill = fips)) +
+  geom_bar(stat = "identity", fill = "dimgray", width = 0.7) +
+  facet_grid(.~fips) + 
+  labs(x = "Year", y = "Emissions (Tons)", title = "Comparison of Motor Vehicle Related Emissions Between Baltimore City and Los Angeles From 1999 - 2008") +
+  theme(plot.title = element_text(size = 14),
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        strip.text.x = element_text(size = 12)) +
+  theme_minimal() + 
+  ggsave("plot6.png", width = 30, height = 30, units = "cm")
 
-print(Two_Locs_Plot)
+print(plotting_two_location)
 ```
 
+*Which city has seen greater changes over time in motor vehicle emissions?*  
+Los Angeles County has seen the greatest changes over time in motor vehicle emissions.  
 
 

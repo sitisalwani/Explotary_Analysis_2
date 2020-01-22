@@ -34,6 +34,6 @@ plotting_two_location <- ggplot(total_emission_two_location, aes(x = factor(year
         axis.title.y = element_text(size = 12),
         strip.text.x = element_text(size = 12)) +
   theme_minimal() + 
-  ggsave("plot6.png", width = 30, height = 30, units = "cm")
+  ggsave("plot6.png", width = 20, height = 20, units = "cm")
 
 print(plotting_two_location)

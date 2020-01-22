@@ -15,7 +15,7 @@ vehicles_Source_Classification_Code <- Source_Classification_Code %>%
 total_emission_two_location <- summarySCC_PM25 %>%
   filter(fips == "24510" | fips == "06037") %>%
   select(fips, SCC, Emissions, year) %>%
-  inner_join(SCC_Vehicles, by = "SCC") %>%
+  inner_join(vehicles_Source_Classification_Code, by = "SCC") %>%
   group_by(fips, year) %>%
   summarise(Total_Emissions = sum(Emissions, na.rm = TRUE)) %>%
   select(Total_Emissions, fips, year)

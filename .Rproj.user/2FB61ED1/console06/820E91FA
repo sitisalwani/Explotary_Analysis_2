@@ -1,3 +1,65 @@
 ]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2[?1034hssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ [Kssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git init
 Initialized empty Git repository in /Users/sitisalwaniyaacob/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2/.git/
 ]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git add .
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git commit -m "initi[K[K[K[K[KIi[Knitial commit"
+[master (root-commit) 15ef41e] Initial commit
+ 7 files changed, 17 insertions(+)
+ create mode 100644 .Rproj.user/2FB61ED1/console06/820E91FA
+ create mode 100644 .Rproj.user/2FB61ED1/console06/INDEX001
+ create mode 100644 .Rproj.user/2FB61ED1/sources/s-DCB7CD86/lock_file
+ create mode 100644 .Rproj.user/shared/notebooks/patch-chunk-names
+ create mode 100644 Exploratory_Analysis_2.Rproj
+ create mode 100644 exdata-data-NEI_data/Source_Classification_Code.rds
+ create mode 100644 exdata-data-NEI_data/summarySCC_PM25.rds
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git remote add origin https://github.com/sitisalwani/Ex plotary_Analysis_2.git
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git push -u origin master
+[KEnumerating objects: 16, done.
+[KCounting objects:   6% (1/16)[KCounting objects:  12% (2/16)[KCounting objects:  18% (3/16)[KCounting objects:  25% (4/16)[KCounting objects:  31% (5/16)[KCounting objects:  37% (6/16)[KCounting objects:  43% (7/16)[KCounting objects:  50% (8/16)[KCounting objects:  56% (9/16)[KCounting objects:  62% (10/16)[KCounting objects:  68% (11/16)[KCounting objects:  75% (12/16)[KCounting objects:  81% (13/16)[KCounting objects:  87% (14/16)[KCounting objects:  93% (15/16)[KCounting objects: 100% (16/16)[KCounting objects: 100% (16/16), done.
+Delta compression using up to 4 threads
+[KCompressing objects:   9% (1/11)[KCompressing objects:  18% (2/11)[KCompressing objects:  27% (3/11)[KCompressing objects:  36% (4/11)[KCompressing objects:  45% (5/11)[KCompressing objects:  54% (6/11)[KCompressing objects:  63% (7/11)[KCompressing objects:  72% (8/11)[KCompressing objects:  81% (9/11)[KCompressing objects:  90% (10/11)[KCompressing objects: 100% (11/11)[KCompressing objects: 100% (11/11), done.
+[KWriting objects:   6% (1/16)[KWriting objects:  12% (2/16)[KWriting objects:  18% (3/16)[KWriting objects:  25% (4/16)[KWriting objects:  31% (5/16)[KWriting objects:  37% (6/16)[KWriting objects:  43% (7/16)[KWriting objects:  50% (8/16)[KWriting objects:  56% (9/16)[KWriting objects:  62% (10/16)[KWriting objects:  68% (11/16)[KWriting objects:  75% (12/16)[KWriting objects:  81% (13/16)[KWriting objects:  87% (14/16)[KWriting objects:  93% (15/16)[KWriting objects:  93% (15/16), 168.00 KiB | 131.00 KiB/s[KWriting objects:  93% (15/16), 1.07 MiB | 410.00 KiB/s[KWriting objects:  93% (15/16), 2.50 MiB | 686.00 KiB/s[KWriting objects:  93% (15/16), 3.00 MiB | 719.00 KiB/s[KWriting objects:  93% (15/16), 6.44 MiB | 1.22 MiB/s[KWriting objects:  93% (15/16), 11.19 MiB | 1.77 MiB/s[KWriting objects:  93% (15/16), 17.50 MiB | 2.83 MiB/s[KWriting objects:  93% (15/16), 22.57 MiB | 4.34 MiB/s[KWriting objects:  93% (15/16), 28.45 MiB | 5.30 MiB/s[KWriting objects: 100% (16/16), 28.45 MiB | 5.30 MiB/s[KWriting objects: 100% (16/16), 29.23 MiB | 3.08 MiB/s, done.
+Total 16 (delta 0), reused 0 (delta 0)
+To https://github.com/sitisalwani/Explotary_Analysis_2.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2[?1034hssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git commit -m "add [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K add test.R
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git commit ""[Kadd test.R"
+error: pathspec 'add test.R' did not match any file(s) known to git
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ gut[K[Kit push
+To https://github.com/sitisalwani/Explotary_Analysis_2.git
+ [31m! [rejected]       [m master -> master (fetch first)
+[31merror: failed to push some refs to 'https://github.com/sitisalwani/Explotary_Analysis_2.git'
+[m[33mhint: Updates were rejected because the remote contains work that you do[m
+[33mhint: not have locally. This is usually caused by another repository pushing[m
+[33mhint: to the same ref. You may want to first integrate the remote changes[m
+[33mhint: (e.g., 'git pull ...') before pushing again.[m
+[33mhint: See the 'Note about fast-forwards' in 'git push --help' for details.[m
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git pushcommit "add test.R"[9Padd test.R
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git add test.R[6Ppushcommit "add test.R"[1@-[1P[C[1@ [1@-[1@m
+[master e235c9d] add test.R
+ 1 file changed, 2 insertions(+)
+ create mode 100644 test.R
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git remoet[K[Kte add origib[Kn Data for Peer Assessment [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Khttps://github.com/sitisalwani/Ex plotary_Analysis_2.git
+fatal: remote origin already exists.
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git remote -v
+origin	https://github.com/sitisalwani/Explotary_Analysis_2.git (fetch)
+origin	https://github.com/sitisalwani/Explotary_Analysis_2.git (push)
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git push
+To https://github.com/sitisalwani/Explotary_Analysis_2.git
+ [31m! [rejected]       [m master -> master (fetch first)
+[31merror: failed to push some refs to 'https://github.com/sitisalwani/Explotary_Analysis_2.git'
+[m[33mhint: Updates were rejected because the remote contains work that you do[m
+[33mhint: not have locally. This is usually caused by another repository pushing[m
+[33mhint: to the same ref. You may want to first integrate the remote changes[m
+[33mhint: (e.g., 'git pull ...') before pushing again.[m
+[33mhint: See the 'Note about fast-forwards' in 'git push --help' for details.[m
+]0;~/Dropbox/Cousera/Course4/Course_Project/Exploratory_Analysis_2ssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ git pull
+remote: Enumerating objects: 4, done.[K
+remote: Counting objects:  25% (1/4)[Kremote: Counting objects:  50% (2/4)[Kremote: Counting objects:  75% (3/4)[Kremote: Counting objects: 100% (4/4)[Kremote: Counting objects: 100% (4/4), done.[K
+remote: Compressing objects:  33% (1/3)[Kremote: Compressing objects:  66% (2/3)[Kremote: Compressing objects: 100% (3/3)[Kremote: Compressing objects: 100% (3/3), done.[K
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0[K
+[KUnpacking objects:  33% (1/3)[KUnpacking objects:  66% (2/3)[KUnpacking objects: 100% (3/3)[KUnpacking objects: 100% (3/3), done.
+From https://github.com/sitisalwani/Explotary_Analysis_2
+   15ef41e..739e7e5  master     -> origin/master
+[Kssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ defaults write org.R-project.R force.LANG en_US.UTF-8
+[Kssy-macbook-pro:Exploratory_Analysis_2 sitisalwaniyaacob$ 
